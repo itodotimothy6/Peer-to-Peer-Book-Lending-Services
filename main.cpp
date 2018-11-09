@@ -241,8 +241,97 @@ vector <Book> searchBookByYear(string year, vector<Book> listofBooks){
 }
 
 int main(){
-    cout << "*******************************************************************************" << endl;
-    cout << "*********************Peer-to-Peer Book Lending Services************************" << endl;
-    cout << "\n"
-    cout << "1. Add "
+    
+    vector<User> users;
+    vector<Book> books;
+    
+    do{
+        cout << "*******************************************************************************" << endl;
+        cout << "\t\t\tPeer-to-Peer Book Lending Services\t\t\t" << endl;
+        cout << "\n";
+        cout << "1. Register a Book: " << endl;
+        cout << "2. Request a Book: " << endl;
+        cout << "3. Return a Book: " << endl;
+        cout << "4. Check Scores: " << endl;
+        cout << "5. Search: " << endl;
+       
+       
+        cout << "Enter a number: " << endl;
+        int num;
+        cin >> num;
+        cin.ignore();
+       
+       
+        switch(num){
+            case 1:{
+                cout << "What is your Name: " << endl;
+                string name;
+                getline(cin, name);
+                cout << "Enter the name of the Book: " << endl;
+                string bookName;
+                getline(cin, bookName);
+                cout << "Enter the Author's name: " << endl;
+                string author;
+                getline(cin, author);
+                cout <<  "Enter the year it was published: " << endl;
+                string year;
+                getline(cin, year);
+                
+                registerBook(name, bookName, author, year, users, books);
+                
+                break;
+            }
+            case 2:{
+                string borrower;
+                string bookName;
+                string author;
+                string year;
+                
+                cout<<"Who are you: " << endl;
+                getline(cin,borrower);
+                cout<<"What book are you requesting? " << endl;
+                getline(cin,bookName);
+                cout<<"By? " << endl;
+                getline(cin,author);
+                cout<<"What year was this book published? " << endl;
+                getline(cin,year);
+                
+                requestBook(borrower, bookName, author, year, users, books);
+                break;
+            }
+            case 3:{
+                string returner;
+                string bookName;
+                string author;
+                string year;
+                char ans;
+                bool goodCondition;
+                
+                cout<<"Who are you? \n";
+                getline(cin,returner);
+                cout<<"What book are you returning? \n";
+                getline(cin, bookName);
+                cout<<"By? \n";
+                getline(cin, author);
+                cout<<"What year was the book published? \n";
+                getline(cin, year);
+                cout<<"Is the book in good condition: \n\ty or n\n";
+                cin >> ans;
+                if (ans == 'y' || ans == 'Y')
+                    goodCondition = 1;
+                else
+                    goodCondition = 0;
+                
+                returnBook(returner, bookName, author, year, goodCondition, users, books);
+                
+                break;
+            }
+            case 4:{
+                printScores(users);
+                break;
+            }
+        }
+    }
+    while (true);
+    
 }
